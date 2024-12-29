@@ -1,7 +1,7 @@
 
 # Neuro-Adaptive AI Engine (NAE)
 
-A cutting-edge AI library inspired by biological neural networks. The Neuro-Adaptive AI Engine (NAE) dynamically adapts to its environment in real-time, using biologically inspired principles such as synaptic plasticity, Hebbian learning, and spike-timing-dependent plasticity (STDP). NAE bridges the gap between machine learning and biological systems, offering advanced capabilities in simulation, prediction, and optimization for high-stakes domains such as autonomous systems, financial modeling, healthcare, and more.
+An AI library inspired by biological neural networks. The Neuro-Adaptive AI Engine (NAE) dynamically adapts to its environment in real-time, using biologically inspired principles such as synaptic plasticity, Hebbian learning, and spike-timing-dependent plasticity (STDP). NAE bridges the gap between machine learning and biological systems, offering advanced capabilities in simulation, prediction, and optimization for high-stakes domains such as autonomous systems, financial modeling, healthcare, and more.
 
 ## Features
 
