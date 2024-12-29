@@ -16,3 +16,10 @@ set(SOURCES
 # Create executable
 add_executable(NeuroAdaptiveAI ${SOURCES})
 
+# Add these lines to include the new source files
+add_executable(NeuroAdaptiveAI main.cpp
+    neural_network.cpp
+    activation_functions.cpp
+    dropout.cpp
+    serialization.cpp
+)

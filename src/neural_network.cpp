@@ -106,3 +106,35 @@ void NeuralNetwork::update_weights(const std::vector<std::vector<double>>& outpu
         }
     }
 }
+
+
+#include "neural_network.h"
+
+double learning_rate_decay(double initial_rate, int epoch, int max_epochs) {
+    return initial_rate * (1 - (epoch / (double)max_epochs));
+}
+
+void NeuralNetwork::adjust_learning_rate(int epoch, int max_epochs) {
+    learning_rate = learning_rate_decay(learning_rate, epoch, max_epochs);
+}
+
+// neural_network.cpp
+#include "dropout.h"
+
+std::vector<double> NeuralNetwork::forward(const std::vector<double>& input) {
+    std::vector<double> input_data = input;
+    Dropout dropout(0.5);  // Example dropout rate of 50%
+    for (size_t i = 0; i < layers.size(); ++i) {
+        std::vector<double> output(layers[i].neurons.size(), 0.0);
+        for (size_t j = 0; j < layers[i].neurons.size(); ++j) {
+            for (size_t k = 0; k < input_data.size(); ++k) {
+                output[j] += input_data[k] * layers[i].weights[j][k];
+            }
+            output[j] += layers[i].biases[j];
+            output = dropout.apply_dropout(output);  // Apply dropout
+            layers[i].neurons[j] = activation_function(output[j], activation_functions[i]);
+        }
+        input_data = output;
+    }
+    return input_data;
+}
