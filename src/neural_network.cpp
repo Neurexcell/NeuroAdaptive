@@ -138,3 +138,42 @@ std::vector<double> NeuralNetwork::forward(const std::vector<double>& input) {
     }
     return input_data;
 }
+#include "neural_network.h"
+#include <cmath>
+#include <iostream>
+
+NeuralNetwork::NeuralNetwork(std::vector<int> sizes) {
+    numLayers = sizes.size();
+    layerSizes = sizes;
+    
+    weights.resize(numLayers - 1);
+    biases.resize(numLayers - 1);
+    activations.resize(numLayers);
+    z_values.resize(numLayers - 1);
+
+    for (int i = 0; i < numLayers - 1; ++i) {
+        weights[i].resize(layerSizes[i + 1]);
+        biases[i].resize(layerSizes[i + 1]);
+        z_values[i].resize(layerSizes[i + 1]);
+        activations[i].resize(layerSizes[i]);
+
+        for (int j = 0; j < layerSizes[i + 1]; ++j) {
+            biases[i][j] = ((double) rand() / (RAND_MAX)) * 0.01;
+            for (int k = 0; k < layerSizes[i]; ++k) {
+                weights[i][j].push_back(((double) rand() / (RAND_MAX)) * 0.01);
+            }
+        }
+    }
+}
+
+double NeuralNetwork::sigmoid(double x) {
+    return 1.0 / (1.0 + exp(-x));
+}
+
+double NeuralNetwork::sigmoidDerivative(double x) {
+    return x * (1.0 - x);
+}
+
+double NeuralNetwork::getActivation(int layerIndex, int neuronIndex) const {
+    return activations[layerIndex][neuronIndex];
+}

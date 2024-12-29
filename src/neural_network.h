@@ -1,22 +1,27 @@
-// neural_network.h
 #ifndef NEURAL_NETWORK_H
 #define NEURAL_NETWORK_H
 
 #include <vector>
-#include <string>
-#include "activation_functions.h" // For activation function enum
 
 class NeuralNetwork {
-public:
-    NeuralNetwork(const std::vector<int>& architecture, 
-                  const std::vector<ActivationFunction>& activation_functions);
-    void adjust_learning_rate(int epoch, int max_epochs);
-    double learning_rate;  // For dynamic learning rate
-    // Add any other methods and attributes for your network
 private:
-    std::vector<ActivationFunction> activation_functions;
-    // Layers, weights, and other properties of your network
+    int numLayers;
+    std::vector<int> layerSizes;
+    std::vector<std::vector<std::vector<double>>> weights;
+    std::vector<std::vector<double>> biases;
+    std::vector<std::vector<double>> activations;
+    std::vector<std::vector<double>> z_values;
+    
+public:
+    NeuralNetwork(std::vector<int> sizes);
+    void forward(const std::vector<double>& input);
+    void backward(const std::vector<double>& expected_output);
+    void updateWeights(double learningRate);
+    
+    double sigmoid(double x);
+    double sigmoidDerivative(double x);
+
+    double getActivation(int layerIndex, int neuronIndex) const;
 };
 
-#endif // NEURAL_NETWORK_H
-
+#endif
